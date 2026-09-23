@@ -1,6 +1,6 @@
 import { Metadata } from "next";
-import { Navbar } from "@/components/layout/Navbar";
-import { Footer } from "@/components/layout/Footer";
+import  Navbar  from "@/components/layout/Navbar";
+import  Footer  from "@/components/layout/Footer";
 import { MobileBottomNav } from "@/components/layout/MobileBottomNav";
 
 export const metadata: Metadata = {
@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     },
 };
 
-export default function MediaLayout({
+export default function PoliciesLayout({
     children,
 }: {
     children: React.ReactNode;

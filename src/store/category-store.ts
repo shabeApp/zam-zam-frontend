@@ -16,9 +16,9 @@ interface CategoryStore {
     fetchTree: (refresh?: boolean) => Promise<void>;
     fetchTreeShortData: (refresh?: boolean) => Promise<void>;
     fetchStats: (refresh?: boolean) => Promise<void>;
-    addMainCategory: (data: { name: string; slug: string; icon?: string; featured?: boolean }) => Promise<boolean>;
-    addSubCategory: (data: { name: string; slug: string; parentCategoryId: string; icon?: string; featured?: boolean }) => Promise<boolean>;
-    editCategory: (id: string, data: Partial<{ name: string; slug: string; icon: string; featured: boolean; parentCategoryId: string | null }>) => Promise<boolean>;
+    addMainCategory: (data: { name: string; slug: string; image?: string; featured?: boolean }) => Promise<boolean>;
+    addSubCategory: (data: { name: string; slug: string; parentCategoryId: string; image?: string; featured?: boolean }) => Promise<boolean>;
+    editCategory: (id: string, data: Partial<{ name: string; slug: string; image: string; featured: boolean; parentCategoryId: string | null }>) => Promise<boolean>;
     removeCategory: (id: string, hard?: boolean) => Promise<boolean>;
 }
 

@@ -1,244 +1,201 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
-import {TwitterIcon as Twitter} from "@/components/icon/twitter";
-import {InstagramIcon as Instagram } from "@/components/icon/instagram";
-import {FacebookIcon as Facebook } from "@/components/icon/facebook";
-import {LinkedinIcon} from "@/components/icon/linkedin";
-import {YoutubeIcon as Youtube} from "@/components/icon/youtube";
-import {MessageCircleCheckIcon as Whatsapp} from "@/components/icon/message-circle-check";
-import { MapPin, Phone, Mail } from "lucide-react";
-// import { Separator } from "@/components/ui/separator";
-import { usePathname } from "next/navigation";
-import { cn } from "@/lib/utils";
-import logoImage from "@/assets/images/favicon/khoshil_logo.webp";
+import { useState } from "react";
 
-const footerLinks = {
-    company: [
-        { href: "/media/ourStory", label: "Our Story" },
-        { href: "/media/post", label: "Journal" },
-        { href: "/media/careers", label: "Careers" },
-        { href: "/media/vendor", label: "Vendor" },
-        { href: "/contact", label: "Contact Us" },
-        { href: "/auth/register", label: "Register" },
-        { href: "/admin/dashboard", label: "admin" },
-        { href: "/wishlist", label: "wishlist" },
+export default function Footer() {
+  const [email, setEmail] = useState("");
 
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (!email) return;
+
+    // TODO: Connect your API here
+    console.log("Newsletter:", email);
+
+    alert("Thanks for subscribing!");
+    setEmail("");
+  };
+
+  const footerLinks = {
+    initiatives: [
+      { name: "hu", href: "/initiatives/housing" },
+      { name: "Data Solutions Lab", href: "/initiatives/data" },
+      { name: "Builders Lab", href: "/initiatives/builders" },
     ],
-    support: [
-        { href: "/myAccount", label: "My Account" },
-        { href: "/track-order/1", label: "Track Order" },
-        { href: "/media/faq", label: "FAQ" },
-        { href: "/media/shipping", label: "Shipping Policy" },
-        { href: "/media/returns", label: "Return & Refund Policy" },
+    organization: [
+      { name: "About", href: "/about" },
+      { name: " Contact us", href: "/blog" },
+      { name: "hi", href: "/careers" },
     ],
-    legal: [
-        { href: "/media/terms", label: "Terms of Service" },
-        { href: "/media/privacy&security", label: "Privacy & Security" },
-        { href: "/media/cookies", label: "Cookie Policy" },
-        { href: "/media/post", label: "Post" },
+    join: [
+      { name: "Contact", href: "/contact" },
+      { name: "Supporters", href: "/supporters" },
+      { name: "Donate", href: "/donate" },
+    ],
+    social: [
+      { name: "LinkedIn", href: "https://linkedin.com" },
+      { name: "X", href: "https://x.com" },
+      { name: "Instagram", href: "https://instagram.com" },
+    ],
+  };
 
-        // { href: "/media/careers", label: "Careers" },
-        // { href: "/media/cookies", label: "Cookie Policy" },
-    ]
-};
+  return (
+    <footer className="bg-[#F5F0E8] text-[#111111] border-t border-neutral-200">
+      <div className="mx-auto px-5 py-12 sm:px-8 lg:px-16">
+        {/* Top Section */}
+        <div className="grid gap-12 lg:grid-cols-2">
+          {/* Brand */}
+          <div className="space-y-4">
+            <h2 className="text-3xl font-bold tracking-tight">zam zam</h2>
 
-const socialLinks = [
-    { href: "https://facebook.com", icon: Facebook, label: "Facebook" },
-    { href: "https://instagram.com", icon: Instagram, label: "Instagram" },
-    { href: "https://linkedin.com", icon: LinkedinIcon, label: "LinkedIn" },
-    { href: "https://twitter.com", icon: Twitter, label: "X" },
-    { href: "https://youtube.com", icon: Youtube, label: "YouTube" },
-    { href: "https://whatsapp.com", icon: Whatsapp, label: "WhatsApp" },
-];
+            <p className="text-[12px] text-gray-400">
+              Building innovative housing, data, and community solutions through
+              research, technology, and collaboration.
+            </p>
 
-export function Footer() {
-    const pathname = usePathname();
-    return (
-        <footer className="relative text-foreground pt-24 overflow-hidden border-t border-white/5 bg-[#34150f]">
-            {/* Premium Background Effects */}
-            <div className="absolute bottom-0 left-0 w-full z-10 hidden lg:block pointer-events-none overflow-hidden">
-                <div className="absolute inset-y-0 left-0 w-1/4 bg-gradient-to-r from-[#34150f] to-transparent z-20" />
-                <div className="absolute inset-y-0 right-0 w-1/4 bg-gradient-to-l from-[#34150f] to-transparent z-20" />
-                <Image 
-                    src="/footer3.png" 
-                    alt="footer-image" 
-                    width={1920} 
-                    height={1080} 
-                    className="w-full h-auto" 
+            <Link
+              href="/initiatives"
+              className="inline-flex items-center rounded-full bg-black px-6 py-3 text-sm font-medium text-white transition hover:scale-105 hover:bg-neutral-800"
+            >
+              Join an Initiative →
+            </Link>
+          </div>
+
+          {/* Links */}
+          <div className="grid grid-cols-2 gap-8 sm:grid-cols-4">
+            <FooterColumn
+              title="Initiatives"
+              links={footerLinks.initiatives}
+            />
+            <FooterColumn
+              title="Organization"
+              links={footerLinks.organization}
+            />
+            <FooterColumn title="Join Us" links={footerLinks.join} />
+            <FooterColumn title="Follow Us" links={footerLinks.social} />
+          </div>
+        </div>
+
+        {/* Divider */}
+        <div className="my-10 h-px bg-neutral-300" />
+
+        {/* Bottom */}
+        <div className="grid gap-10 lg:grid-cols-2">
+          {/* Logo */}
+          <div className="flex items-end gap-4">
+            <svg
+              viewBox="0 0 160 200"
+              className="h-28 w-24 text-black"
+              fill="currentColor"
+            >
+              <path d="M0 0H45V28H75V58H45V85H20V58H0Z" />
+              <rect x="0" y="105" width="28" height="95" rx="14" />
+              <path d="M50 105H90V165C90 182 77 195 60 195H50V165H75V135H50Z" />
+            </svg>
+
+            <div>
+              <h3 className="font-semibold">Terner Labs</h3>
+              <p className="text-sm text-neutral-600">
+                Housing Innovation • UC Berkeley
+              </p>
+            </div>
+          </div>
+
+          {/* Newsletter */}
+          <div>
+            <h3 className="mb-4 text-xs font-bold uppercase tracking-[0.2em]">
+              Newsletter
+            </h3>
+
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <div className="flex flex-col gap-3 sm:flex-row">
+                <input
+                  type="email"
+                  required
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="Enter your email"
+                  className="flex-1 rounded-xl border border-neutral-300 bg-white px-4 py-3 text-sm outline-none transition focus:border-black focus:ring-2 focus:ring-black/10"
                 />
-            </div>
-            <div className="absolute inset-0 z-0 pointer-events-none">
-                {/* Subtle Radial Gradient for Depth */}
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_-10%,#7a2f22_0%,transparent_70%)] opacity-50" />
 
-                {/* Professional Grain/Noise Overlay - Increased visibility */}
-                <div 
-                    className="absolute inset-0 opacity-[0.08] mix-blend-overlay" 
-                    style={{ 
-                        backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` 
-                    }} 
-                />
-            </div>
+                <button
+                  type="submit"
+                  className="rounded-xl bg-black px-6 py-3 text-sm font-medium text-white transition hover:bg-neutral-800 active:scale-95"
+                >
+                  Subscribe
+                </button>
+              </div>
 
+              <p className="text-xs leading-6 text-neutral-600">
+                Terner Labs complements the work of the{" "}
+                <Link
+                  href="/terner-center"
+                  className="font-medium underline underline-offset-2 hover:no-underline"
+                >
+                  Terner Center for Housing Innovation
+                </Link>{" "}
+                at UC Berkeley.
+              </p>
+            </form>
+          </div>
+        </div>
 
-            <div className="container-custom relative z-10">
-                <div className="grid grid-cols-2 lg:grid-cols-12 gap-x-8 gap-y-12 lg:gap-12 mb-20">
-                    {/* Brand Section */}
-                    <div className="col-span-2 lg:col-span-4 relative">
-                        <div className="flex items-center">
-                            {/* <h2 className="text-6xl sm:text-7xl md:text-[6rem] lg:text-[8rem] text-white/90 font-heading font-bold leading-[0.8] tracking-tight pointer-events-none select-none">
-                            GEMINI
-                        </h2> */}
-                        <Image src={logoImage} alt="Logo" width={35} height={35} />
-                            <h3 className="text-xl md:text-xl tracking-tight text-white">
-                                Khoshil
-                            </h3>
-                        </div>
-                        <div className="mt-8 space-y-4 relative z-10">
-                            <blockquote className="quote max-w-md text-stone-200 italic leading-relaxed">
-                                {"From Soil to Soul. Where art breathes, and tradition lives."}
-                            </blockquote>
-                            <p className="max-w-xs text-sm text-stone-300 font-light tracking-wide">
-                                Celebrating the artisans of Shantiniketan. Every piece handcrafted, every story authentic.
-                            </p>
+        {/* Bottom Bar */}
+        <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-neutral-300 pt-6 text-xs text-neutral-500 sm:flex-row">
+          <p>© {new Date().getFullYear()} Terner Labs. All rights reserved.</p>
 
-                            <div className="pt-8 space-y-5">
-                                <div className="flex items-start gap-4 group cursor-default">
-                                    <div className="w-10 h-10 rounded-full border border-white/10 bg-white/5 flex items-center justify-center shrink-0 group-hover:bg-white group-hover:border-white transition-all duration-500">
-                                        <MapPin className="size-4 text-stone-300 group-hover:text-[#34150f] transition-colors" />
-                                    </div>
-                                    <div className="text-sm">
-                                        <p className="font-bold text-white/50 uppercase tracking-[0.2em] text-[9px] mb-1.5 mt-1">Location</p>
-                                        <p className="text-stone-200 font-light">Shantiniketan, Bolpur, WB 731235</p>
-                                    </div>
-                                </div>
-
-                                <div className="flex items-start gap-4 group cursor-default">
-                                    <div className="size-10 rounded-full border border-white/10 bg-white/5 flex items-center justify-center shrink-0 group-hover:bg-white group-hover:border-white transition-all duration-500">
-                                        <Phone className="size-4 text-stone-300 group-hover:text-[#34150f] transition-colors" />
-                                    </div>
-                                    <div className="text-sm">
-                                        <p className="font-bold text-white/50 uppercase tracking-[0.2em] text-[9px] mb-1.5 mt-1">Phone</p>
-                                        <p className="text-stone-200 font-light">+91 98765 43210</p>
-                                    </div>
-                                </div>
-
-                                <div className="flex items-start gap-4 group cursor-default">
-                                    <div className="size-10 rounded-full border border-white/10 bg-white/5 flex items-center justify-center shrink-0 group-hover:bg-white group-hover:border-white transition-all duration-500">
-                                        <Mail className="size-4 text-stone-300 group-hover:text-[#34150f] transition-colors" />
-                                    </div>
-                                    <div className="text-sm">
-                                        <p className="font-bold text-white/50 uppercase tracking-[0.2em] text-[9px] mb-1.5 mt-1">Email</p>
-                                        <p className="text-stone-200 font-light underline-offset-4 hover:underline cursor-pointer">contact@geminiheritage.com</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    {/* Company */}
-                    <div className="col-span-1 lg:col-span-2 space-y-8 pt-6 lg:pt-4">
-                        <h4 className="text-[10px] font-semibold uppercase tracking-[0.3em] text-white/40">Company</h4>
-                        <ul className="space-y-4">
-                            {footerLinks.company.map((link) => (
-                                <li key={link.href}>
-                                    <Link
-                                        href={link.href}
-                                        className={cn(
-                                            "text-[13px] transition-all duration-300 font-light relative group inline-block",
-                                            pathname === link.href ? "text-white font-medium" : "text-stone-300 hover:text-white"
-                                        )}
-                                    >
-                                        {link.label}
-                                        <span className={cn(
-                                            "absolute -bottom-1 left-0 w-full h-[0.5px] bg-white transform transition-transform duration-500 ease-out",
-                                            pathname === link.href ? "scale-x-100 origin-left" : "scale-x-0 origin-right group-hover:scale-x-100 group-hover:origin-left"
-                                        )} />
-                                    </Link>
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-
-                    {/* Support */}
-                    <div className="col-span-1 lg:col-span-2 space-y-8 pt-6 lg:pt-4">
-                        <h4 className="text-[10px] font-semibold uppercase tracking-[0.3em] text-white/40">Support</h4>
-                        <ul className="space-y-4">
-                            {footerLinks.support.map((link) => (
-                                <li key={link.href}>
-                                    <Link
-                                        href={link.href}
-                                        className={cn(
-                                            "text-[13px] transition-all duration-300 font-light relative group inline-block",
-                                            pathname === link.href ? "text-white font-medium" : "text-stone-300 hover:text-white"
-                                        )}
-                                    >
-                                        {link.label}
-                                        <span className={cn(
-                                            "absolute -bottom-1 left-0 w-full h-[0.5px] bg-white transform transition-transform duration-500 ease-out",
-                                            pathname === link.href ? "scale-x-100 origin-left" : "scale-x-0 origin-right group-hover:scale-x-100 group-hover:origin-left"
-                                        )} />
-                                    </Link>
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-
-                    {/* Legal */}
-                    <div className="col-span-1 lg:col-span-2 space-y-8 pt-6 lg:pt-4">
-                        <h4 className="text-[10px] font-semibold uppercase tracking-[0.3em] text-white/40">Legal</h4>
-                        <ul className="space-y-4">
-                            {footerLinks.legal.map((link) => (
-                                <li key={link.href}>
-                                    <Link
-                                        href={link.href}
-                                        className={cn(
-                                            "text-[13px] transition-all duration-300 font-light relative group inline-block",
-                                            pathname === link.href ? "text-white font-medium" : "text-stone-300 hover:text-white"
-                                        )}
-                                    >
-                                        {link.label}
-                                        <span className={cn(
-                                            "absolute -bottom-1 left-0 w-full h-[0.5px] bg-white transform transition-transform duration-500 ease-out",
-                                            pathname === link.href ? "scale-x-100 origin-left" : "scale-x-0 origin-right group-hover:scale-x-100 group-hover:origin-left"
-                                        )} />
-                                    </Link>
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-
-                    {/* Social Media */}
-                    <div className="col-span-1 lg:col-span-2 space-y-8 pt-6 lg:pt-4">
-                        <h4 className="text-[10px] font-semibold uppercase tracking-[0.3em] text-white/40">Connect</h4>
-                        <div className="flex flex-wrap gap-4">
-                            {socialLinks.map((social) => (
-                                <a
-                                    key={social.label}
-                                    href={social.href}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="size-10 flex items-center justify-center text-stone-300 transition-all duration-50 group"
-                                    aria-label={social.label}
-                                >
-                                    <social.icon className="size-4 fill-current" />
-                                </a>
-                            ))}
-                        </div>
-                    </div>
-                </div>
-
-                {/* Bottom Bar */}
-                <div className="flex flex-col sm:flex-row items-center justify-center gap-6 text-stone-400 pb-2 ">
-                    <p className="text-[9px]  text-white uppercase tracking-[0.3em] font-medium sm:text-left text-center">
-                        © {new Date().getFullYear()} GEMINI HERITAGE. ALL RIGHTS RESERVED.
-                    </p>
-                </div>
-            </div>
-        </footer>
-    );
+          <div className="flex gap-5">
+            <Link href="/privacy" className="hover:text-black">
+              Privacy
+            </Link>
+            <Link href="/terms" className="hover:text-black">
+              Terms
+            </Link>
+            <Link href="/cookies" className="hover:text-black">
+              Cookies
+            </Link>
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
 }
 
+type LinkItem = {
+  name: string;
+  href: string;
+};
 
+function FooterColumn({
+  title,
+  links,
+}: {
+  title: string;
+  links: LinkItem[];
+}) {
+  return (
+    <div>
+      <h3 className="mb-4 text-xs font-bold uppercase tracking-[0.15em] text-neutral-500">
+        {title}
+      </h3>
+
+      <ul className="space-y-3">
+        {links.map((link) => (
+          <li key={link.name}>
+            <Link
+              href={link.href}
+              className="group inline-flex items-center text-sm transition hover:text-black"
+            >
+              {link.name}
+              <span className="ml-1 -translate-x-1 opacity-0 transition-all group-hover:translate-x-0 group-hover:opacity-100">
+                →
+              </span>
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}

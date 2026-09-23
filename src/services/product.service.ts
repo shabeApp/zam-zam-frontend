@@ -62,75 +62,75 @@ export const productService = {
         message: string;
         data: { data: Product[]; pagination: any }
     }> => {
-        const response = await api.get("products", { params });
+        const response = await api.get("v1/products", { params });
         return response.data;
     },
 
     getProductById: async (id: string): Promise<{ ok: boolean; message: string; data: Product }> => {
-        const response = await api.get(`products/${id}`);
+        const response = await api.get(`v1/products/${id}`);
         return response.data;
     },
 
     // GET /products/featured — Public
     getFeaturedProducts: async (categoryId?: string): Promise<{ ok: boolean; message: string; data: Product[] }> => {
-        const url = categoryId ? `products/featured?categoryId=${categoryId}` : "products/featured";
+        const url = categoryId ? `v1/products/featured?categoryId=${categoryId}` : "v1/products/featured";
         const response = await api.get(url);
         return response.data;
     },
 
     getFeaturedProductsBySlug: async (slug: string): Promise<{ ok: boolean; message: string; data: Product[] }> => {
-        const response = await api.get(`products/featured/${slug}`);
+        const response = await api.get(`v1/products/featured/${slug}`);
         return response.data;
     },
 
     // GET /products/slug/:slug — Public
     getProductBySlug: async (slug: string): Promise<{ ok: boolean; message: string; data: Product }> => {
-        const response = await api.get(`products/slug/${slug}`);
+        const response = await api.get(`v1/products/slug/${slug}`);
         // console.log("Product fetched successfully", response.data);
         return response.data;
     },
 
     //  /products — Admin only
     createProduct: async (data: CreateProductData): Promise<{ ok: boolean; message: string; data: Product }> => {
-        const response = await api.post("products", data);
+        const response = await api.post("v1/products", data);
         return response.data;
     },
 
     // PUT /products/:id — Admin only
     updateProduct: async (id: string, data: Partial<CreateProductData>): Promise<{ ok: boolean; message: string; data: Product }> => {
-        const response = await api.put(`products/${id}`, data);
+        const response = await api.put(`v1/products/${id}`, data);
         return response.data;
     },
 
     // DELETE /products/:id — Admin only
     deleteProduct: async (id: string): Promise<{ ok: boolean; message: string; data: Product }> => {
-        const response = await api.delete(`products/${id}`);
+        const response = await api.delete(`v1/products/${id}`);
         return response.data;
     },
 
     getProductReviews: async (id: string): Promise<{ ok: boolean; message: string; data: any[] }> => {
-        const response = await api.get(`products/${id}/reviews`);
+        const response = await api.get(`v1/products/${id}/reviews`);
         return response.data;
     },
 
     addReview: async (id: string, data: { rating: number; comment: string }): Promise<{ ok: boolean; message: string; data: any }> => {
-        const response = await api.post(`products/${id}/review`, data);
+        const response = await api.post(`v1/products/${id}/review`, data);
         return response.data;
     },
 
     // Admin Review endpoints
     getAllReviews: async (): Promise<{ ok: boolean; message: string; data: any[] }> => {
-        const response = await api.get(`products/reviews`);
+        const response = await api.get(`v1/products/reviews`);
         return response.data;
     },
 
     updateReview: async (reviewId: string, data: { rating: number; comment: string }): Promise<{ ok: boolean; message: string; data: any }> => {
-        const response = await api.put(`products/review/${reviewId}`, data);
+        const response = await api.put(`v1/products/review/${reviewId}`, data);
         return response.data;
     },
 
     deleteReview: async (reviewId: string): Promise<{ ok: boolean; message: string; data: any }> => {
-        const response = await api.delete(`products/review/${reviewId}`);
+        const response = await api.delete(`v1/products/review/${reviewId}`);
         return response.data;
     },
 
@@ -139,7 +139,7 @@ export const productService = {
         message: string;
         data: { data: Product[]; pagination: any }
     }> => {
-        const response = await api.get("products/admin", { params });
+        const response = await api.get("v1/products/admin", { params });
         return response.data;
     },
 
@@ -148,7 +148,7 @@ export const productService = {
         message: string;
         data: SearchProduct[];
     }> => {
-        const response = await api.get("products/search", {
+        const response = await api.get("v1/products/search", {
             params: {
                 query,
                 limit,

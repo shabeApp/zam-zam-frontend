@@ -1,369 +1,195 @@
 "use client";
-import Image from "next/image";
-import Link from "next/link";
-import logoImage from "@/assets/images/favicon/logowhite_logo.webp";
-import { usePathname } from "next/navigation";
-import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
-import { useSearchStore } from "@/store/search-store";
-import { Badge } from "@/components/ui/badge";
-import { useAuthStore } from "@/store/auth-store";
-import { useState, useEffect, Suspense } from "react";
-import {
-    Menu,
-    X,
-    ChevronRight,
-    BookOpen,
-    Newspaper,
-    Briefcase,
-    Store,
-    Mail,
-    UserPlus,
-    Settings,
-    ShoppingBag, // Using lucide-react ShoppingBag
-    Heart,       // Using lucide-react Heart
-    User,        // Using lucide-react User
-    Truck,
-    HelpCircle,
-    RefreshCcw,
-    FileText,
-    Lock,
-    Cookie
-} from "lucide-react";
-import { SearchIcon as Search } from "@/components/icon/search"; // Keep custom Search icon
-import { cartLocalStorageData } from "@/localStorage/cartData";
-import TopBarNotification from "./TopBarNotification";
-// import { userLocalStorageData } from "@/localStorage/userData";
 
-const navLinks = [
-    { href: "/", label: "Home" },
-    {
-        href: "/products",
-        label: "Shop",
-        subLinks: [
-            { href: "/products", label: "Shoping Products" },
-            { href: "/gifting", label: "Gifting" },
-        ]
-    },
-    { href: "/artists", label: "Artisans" },
-    {
-        href: "/our-story", label: "Our Story", subLinks: [
-            { href: "/our-story", label: "Our Story" },
-            { href: "/media/careers", label: "Join Us" },
-            { href: "/contact", label: "Contact Us" },
-        ]
-    },
-    {
-        href: "/media/privacy&security",
-        label: "Policy&security",
-        subLinks: [
-            { href: "/media/shipping", label: "Shipping Policy" },
-            { href: "/media/returns", label: "Return & Refund Policy" },
-            // { href: "/media/refund", label: "Refund Policy" },
-            { href: "/media/terms", label: "Terms of Service" },
-            { href: "/media/privacy&security", label: "Privacy & Security" },
-        ]
-    },
+import React, { useState } from "react";
+import { Menu, Search, ShoppingBag, User, X, Sparkles, ChevronRight } from "lucide-react";
 
-];
+export default function Header() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
+  const cartItemCount = 2; // Example count
 
-const MobileLink = [
-    { href: "/myAccount", label: "My Account", icon: User },
-    { href: "/wishlist", label: "Wishlist", icon: Heart },
-    { href: "/contact", label: "Contact Us", icon: Mail },
-    { href: "/media/ourStory", label: "Our Story", icon: BookOpen },
-    { href: "/auth/register", label: "Register", icon: UserPlus },
-    { href: "/track-order/1", label: "Track Order", icon: Truck },
-    // { href: "/media/post", label: "Journal", icon: Newspaper },
-    { href: "/media/careers", label: "Careers", icon: Briefcase },
-    { href: "/media/vendor", label: "Vendor", icon: Store },
-    { href: "/cart", label: "Cart", icon: ShoppingBag },
-    { href: "/media/faq", label: "FAQ", icon: HelpCircle },
-    { href: "/media/shipping", label: "Shipping Policy", icon: Truck },
-    { href: "/media/returns", label: "Return & Refund Policy", icon: RefreshCcw },
-    // { href: "/media/refund", label: "Refund Policy" },
-    { href: "/admin/dashboard", label: "admin", icon: Settings },
-    { href: "/media/terms", label: "Terms of Service", icon: FileText },
-    { href: "/media/privacy&security", label: "Privacy & Security", icon: Lock },
-    { href: "/media/cookies", label: "Cookie Policy", icon: Cookie },
-    // { href: "/media/post", label: "Post" },
-];
+  const navLinks = [
+    { name: "Home", href: "/" },
+    { name: "Dresses", href: "/products" },
+    { name: "Punjabi", href: "/products" },
+    { name: "About Us", href: "/our-story" },
+    { name: "Contact Us", href: "/contact" },
+  ];
 
-export function Navbar() {
-    const [hasMounted, setHasMounted] = useState(false);
-    const [cartItemCount, setCartItemCount] = useState(0);
+  return (
+    <header className="sticky top-0 z-50 bg-[#F5F0E8]/85 backdrop-blur-md border-b border-[#E5DCCB] transition-all duration-300">
+      <div className="max-w-7xl mx-auto px-4 sm:px-8 h-20 flex items-center justify-between">
+        
+        {/* LEFT: Mobile Menu Button & Brand Emblem */}
+        <div className="flex items-center gap-4">
+          <button
+            className="md:hidden text-[#2C1810] p-2 hover:bg-[#E5DCCB]/50 rounded-full transition-colors focus:outline-none"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label="Toggle menu"
+          >
+            {mobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
+          </button>
 
-    useEffect(() => {
-        const handleCartUpdate = () => {
-            setCartItemCount(cartLocalStorageData.getCartCount());
-        };
+          {/* Artistic Brand Logo */}
+          <a href="" className="flex items-center gap-3 group">
+            <div className="relative w-10 h-10 rounded-full bg-gradient-to-br from-[#8B1538] to-[#5C3D1E] p-[1px] shadow-sm transition-transform duration-300 group-hover:scale-105">
+              <div className="w-full h-full bg-[#F5F0E8] rounded-full flex items-center justify-center border border-[#E5DCCB]">
+                <span className="font-serif text-[#8B1538] font-bold text-xs tracking-widest pl-0.5">
+                  TL
+                </span>
+              </div>
+            </div>
+            <div className="hidden sm:flex flex-col">
+              <span className="font-serif text-lg tracking-[0.18em] uppercase font-semibold text-[#2C1810] leading-none">
+                The Heritage
+              </span>
+              <span className="text-[9px] uppercase tracking-[0.25em] text-[#8B1538] font-medium mt-1">
+                Kantha & Silk
+              </span>
+            </div>
+          </a>
+        </div>
 
-        const init = () => {
-            handleCartUpdate();
-            setHasMounted(true);
-        };
+        {/* CENTER: Artistic Desktop Navigation */}
+        <nav className="hidden md:flex items-center gap-8">
+          {navLinks.map((link) => (
+            <a
+              key={link.name}
+              href={link.href}
+              className="relative text-xs uppercase tracking-[0.2em] font-medium text-[#2C1810]/80 hover:text-[#8B1538] transition-colors py-2 group"
+            >
+              {link.name}
+              <span className="absolute bottom-0 left-0 w-full h-[1.5px] bg-[#8B1538] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
+            </a>
+          ))}
+        </nav>
 
-        init();
-        window.addEventListener("cartUpdated", handleCartUpdate);
-        return () => window.removeEventListener("cartUpdated", handleCartUpdate);
-    }, []);
-
-    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-    const [expandedLinks, setExpandedLinks] = useState<string[]>([]);
-
-    const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
-    const toggleSubLinks = (label: string) => {
-        setExpandedLinks(prev =>
-            prev.includes(label) ? prev.filter(l => l !== label) : [...prev, label]
-        );
-    };
-
-    const pathname = usePathname();
-    const { openSearch } = useSearchStore();
-    const logout = useAuthStore(state => state.logout);
-    // const user = userLocalStorageData.getUser();
-
-    return (
-        <>
-            <Suspense>
-                < TopBarNotification />
-            </Suspense>
-            <header className="w-full h-22.5 border-b bg-background/80 backdrop-blur-lg flex items-center sticky top-0 z-50">
-                <div className="container-custom">
-                    <nav className="flex h-16 items-center justify-between gap-4">
-                        {/* Logo - Hidden when search is open on mobile */}
-                        <Link href="/" className="flex items-center">
-                            <Image src={logoImage} alt="Logo" width={30} height={30}/>
-                            <h3 className="text-xl md:text-xl tracking-tight text-black">
-                                Khoshil
-                            </h3>
-                        </Link>
-
-                        {/* Desktop Navigation */}
-                        <div className="hidden items-start gap-6 md:flex">
-                            {navLinks.map((link) => {
-                                const isActive = pathname === link.href || (pathname.startsWith(link.href) && link.href !== "/");
-                                return (
-                                    <div key={link.href} className="relative group h-full flex items-center py-2">
-                                        <Link
-                                            href={link.href}
-                                            className={cn(
-                                                "text-sm font-medium transition-colors hover:text-foreground relative py-2",
-                                                isActive ? "text-primary font-bold" : "text-muted-foreground"
-                                            )}
-                                        >
-                                            <p className="text-[15px]">{link.label}</p>
-                                            <span className={cn(
-                                                "absolute bottom-0 left-0 w-full h-[2px] bg-primary transform transition-transform duration-300 ease-out",
-                                                isActive ? "scale-x-100 origin-left" : "scale-x-0 origin-right group-hover:scale-x-100 group-hover:origin-left"
-                                            )} />
-                                        </Link>
-
-                                        {link.subLinks && (
-                                            <div className="absolute top-full left-0 invisible opacity-0 -translate-x-2 group-hover:visible group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 ease-out pt-4 w-48 z-50">
-                                                <div className="bg-background shadow-lg flex flex-col py-2 border-x border-b">
-                                                    {link.subLinks.map((subLink, index) => (
-                                                        <Link
-                                                            key={index}
-                                                            href={subLink.href}
-                                                            className="px-4 py-2 text-sm text-muted-foreground hover:text-foreground hover:bg-muted transition-colors duration-200 relative group/sub"
-                                                        >
-                                                            {subLink.label}
-                                                            <span className="absolute bottom-1 left-4 w-[calc(100%-2rem)] h-0.5 bg-primary scale-x-0 origin-left group-hover/sub:scale-x-100 transition-transform duration-300 ease-out" />
-                                                        </Link>
-                                                    ))}
-                                                </div>
-                                            </div>
-                                        )}
-                                    </div>
-                                );
-                            })}
-                        </div>
-                        {/* Attached Search Trigger (Desktop) */}
-                        <div className="hidden lg:flex flex-1 max-w-md mx-6">
-
-                        </div>
-
-                        {/* Right Actions */}
-                        <div className="flex items-end gap-1 md:gap-5 text-primary">
-                            {/* Search Icon (Mobile/Tablet) */}
-                            <Button
-                                variant="outline"
-                                size="icon"
-                                className=" border-none hover:bg-transparent text-black hover:text-black"
-                                onClick={openSearch}
-                            >
-                                <Search />
-                            </Button>
-
-                            <Button variant="outline" size="icon" className={cn( // Changed Wishlist to Heart
-                                "hidden md:flex border-none hover:bg-transparent relative group transition-colors",
-                                pathname.startsWith("/wishlist") ? "text-black" : "text-black hover:text-black"
-                            )} asChild> 
-                                <Link href="/wishlist">
-                                    <Heart />
-                                </Link>
-                            </Button>
-
-                            {/* Profile - Hidden on mobile */}
-                            <div className="relative group hidden md:flex items-center h-full">
-                                <Button variant="outline" size="icon" className={cn(
-                                    "border-none hover:bg-transparent hover:text-black relative transition-colors",
-                                    pathname.startsWith("/myAccount") ? "text-black" : "text-black hover:text-black"
-                                )} asChild>
-                                    <Link href="/myAccount"> 
-                                        <User />
-                                    </Link>
-                                </Button>
-
-                                <div className="absolute top-full right-0 invisible opacity-0 translate-y-2 group-hover:visible group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 ease-out pt-7 w-48 z-50">
-                                    <div className="bg-background shadow-lg flex flex-col py-2 border-x border-b">
-                                        <Link
-                                            href="/myAccount"
-                                            className="px-4 py-2 text-sm text-muted-foreground hover:text-foreground hover:bg-muted transition-colors duration-200 relative group/sub"
-                                        >
-                                            Account Overview
-                                            <span className="absolute bottom-1 left-4 w-[calc(100%-2rem)] h-0.5 bg-primary scale-x-0 origin-left group-hover/sub:scale-x-100 transition-transform duration-300 ease-out" />
-                                        </Link>
-                                        <Link
-                                            href="/address"
-                                            className="px-4 py-2 text-sm text-muted-foreground hover:text-foreground hover:bg-muted transition-colors duration-200 relative group/sub"
-                                        >
-                                            Addresses
-                                            <span className="absolute bottom-1 left-4 w-[calc(100%-2rem)] h-0.5 bg-primary scale-x-0 origin-left group-hover/sub:scale-x-100 transition-transform duration-300 ease-out" />
-                                        </Link>
-                                        <Link
-                                            href="/track-order/1"
-                                            className="px-4 py-2 text-sm text-muted-foreground hover:text-foreground hover:bg-muted transition-colors duration-200 relative group/sub"
-                                        >
-                                            Track Order
-                                            <span className="absolute bottom-1 left-4 w-[calc(100%-2rem)] h-0.5 bg-primary scale-x-0 origin-left group-hover/sub:scale-x-100 transition-transform duration-300 ease-out" />
-                                        </Link>
-                                        <div className="h-px bg-border my-1" />
-                                        <button
-                                            onClick={() => logout()}
-                                            className="px-4 py-2 text-sm text-red-500 hover:text-red-600 hover:bg-red-50 transition-colors duration-200 text-left w-full relative group/sub"
-                                        >
-                                            Logout
-                                            <span className="absolute bottom-1 left-4 w-[calc(100%-2rem)] h-0.5 bg-red-500 scale-x-0 origin-left group-hover/sub:scale-x-100 transition-transform duration-300 ease-out" />
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-
-                            {/* Cart - Hidden on mobile */}
-                            <Button variant="outline" size="icon" className={cn(
-                                "relative hidden md:flex border-none hover:bg-transparent group transition-colors",
-                                pathname.startsWith("/cart") ? "text-primary" : "text-black hover:text-primary"
-                            )} asChild>
-                                <Link href="/cart">
-                                    <ShoppingBag className="" /> 
-                                    {cartItemCount > 0 && (
-                                        <Badge
-                                            className="absolute -right-1 -top-1 size-4 rounded-full p-0 text-[10px] flex items-center justify-center bg-primary text-primary-foreground border-none"
-                                        >
-                                            {cartItemCount}
-                                        </Badge>
-                                    )}
-                                    <span className={cn(
-                                        "absolute bottom-0 left-0 w-full h-[2px] bg-primary transform transition-transform duration-300 ease-out",
-                                        pathname.startsWith("/cart") ? "scale-x-100 origin-left" : "scale-x-0 origin-right group-hover:scale-x-100 group-hover:origin-left"
-                                    )} />
-                                </Link>
-                            </Button>
-
-                            {/* Mobile Menu Toggle */}
-                            <Button
-                                variant="ghost"
-                                size="icon"
-                                className="md:hidden size-7  border-none "
-                                onClick={toggleSidebar}
-                            >
-                                <Menu className="size-5" />
-                            </Button>
-                        </div>
-                    </nav>
-                </div>
-            </header>
-
-            {/* Mobile Sidebar */}
-            {isSidebarOpen && (
-                <>
-                    {/* Overlay */}
-                    <div
-                        onClick={toggleSidebar}
-                        className="fixed inset-0 bg-black/30 backdrop-blur-[2px] z-[100] md:hidden"
-                    />
-                    {/* Panel */}
-                    <div
-                        className="fixed right-0 top-0 bottom-0 w-72 bg-background z-[101] md:hidden flex flex-col shadow-2xl border-l"
-                    >
-                        {/* Header */}
-                        <div className="p-4 border-b flex items-center justify-between">
-                            <Button variant="ghost" size="icon" onClick={toggleSidebar} className="h-8 w-8 rounded-full">
-                                <X className="size-4" />
-                            </Button>
-                        </div>
-
-                        {/* Navigation */}
-                        <div className="flex-1 overflow-y-auto py-4">
-                            <nav className="flex flex-col px-3 gap-1">
-                                {MobileLink.map((link) => {
-                                    // const hasSubLinks = link.subLinks && link.subLinks.length > 0;
-                                    const isExpanded = expandedLinks.includes(link.label);
-                                    const isActive = pathname === link.href;
-
-                                    return (
-                                        <div key={link.label} className="flex flex-col"> 
-                                            <div className="flex items-center group">
-                                                <Link
-                                                    href={link.href}
-                                                    className={cn(
-                                                        "flex flex-1 items-center gap-3 py-2 px-3 text-[14px] font-medium rounded-md transition-all",
-                                                        isActive
-                                                            ? "text-primary bg-primary/5"
-                                                            : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
-                                                    )}
-                                                    onClick={toggleSidebar}
-                                                >
-                                                    <link.icon className="size-4 shrink-0" />
-                                                    {link.label}
-                                                </Link>
-                                                {/* {hasSubLinks && (
-                                                    <button
-                                                        onClick={() => toggleSubLinks(link.label)}
-                                                        className="p-2 text-muted-foreground hover:text-foreground transition-colors"
-                                                    >
-                                                        <ChevronRight className={cn(
-                                                            "h-3.5 w-3.5 transition-transform duration-200",
-                                                            isExpanded && "rotate-90"
-                                                        )} />
-                                                    </button>
-                                                )} */}
-                                            </div>
-
-                                            {/* {hasSubLinks && isExpanded && (
-                                                <div className="ml-4 pl-2 border-l border-muted/50 flex flex-col mt-1 gap-1">
-                                                    {link.subLinks?.map((sub, idx) => (
-                                                        <Link
-                                                            key={idx}
-                                                            href={sub.href}
-                                                            className="py-2 px-3 text-[13px] text-muted-foreground hover:text-primary transition-colors"
-                                                            onClick={toggleSidebar}
-                                                        >
-                                                            {sub.label}
-                                                        </Link>
-                                                    ))}
-                                                </div>
-                                            )} */}
-                                        </div>
-                                    );
-                                })}
-                            </nav>
-                        </div>
-                    </div>
-                </>
+        {/* RIGHT: Actions (Search, Profile, Cart) */}
+        <div className="flex items-center gap-2 sm:gap-4">
+          {/* Expandable Search Input */}
+          <div className="relative flex items-center">
+            {searchOpen && (
+              <input
+                type="text"
+                placeholder="Search Sarees, Crafts..."
+                className="w-40 sm:w-56 bg-[#E8E0D2] text-xs text-[#2C1810] placeholder-[#2C1810]/50 rounded-full px-4 py-2 pr-8 outline-none border border-[#D5C8B2] animate-in fade-in slide-in-from-right-4 duration-300"
+                autoFocus
+              />
             )}
-        </>
-    );
+            <button
+              onClick={() => setSearchOpen(!searchOpen)}
+              className="p-2 text-[#2C1810]/80 hover:text-[#8B1538] hover:bg-[#E5DCCB]/50 rounded-full transition-colors"
+              aria-label="Search"
+            >
+              {searchOpen ? <X size={18} /> : <Search size={19} />}
+            </button>
+          </div>
+
+          <a
+            href="/account"
+            className="p-2 text-[#2C1810]/80 hover:text-[#8B1538] hover:bg-[#E5DCCB]/50 rounded-full transition-colors"
+            aria-label="Account"
+          >
+            <User size={19} />
+          </a>
+
+          {/* Cart Icon with Counter */}
+          <a
+            href="/cart"
+            className="relative p-2 text-[#2C1810]/80 hover:text-[#8B1538] hover:bg-[#E5DCCB]/50 rounded-full transition-colors group"
+            aria-label="Shopping Cart"
+          >
+            <ShoppingBag size={19} />
+            {cartItemCount > 0 && (
+              <span className="absolute top-1 right-1 w-4 h-4 bg-[#8B1538] text-white text-[9px] font-bold rounded-full flex items-center justify-center animate-pulse">
+                {cartItemCount}
+              </span>
+            )}
+          </a>
+        </div>
+      </div>
+
+      {/* MOBILE NAVIGATION DRAWER */}
+      {mobileMenuOpen && (
+        <div className="md:hidden border-t border-[#E5DCCB] bg-[#F5F0E8] px-6 py-6 space-y-4 animate-in slide-in-from-top-2 duration-300 shadow-xl">
+          <div className="flex items-center gap-2 text-[10px] uppercase tracking-[0.2em] text-[#8B1538] font-bold pb-2 border-b border-[#E5DCCB]">
+            <Sparkles size={12} /> Curated Collections
+          </div>
+          
+          <div className="flex flex-col space-y-3">
+            {navLinks.map((link) => (
+              <a
+                key={link.name}
+                href={link.href}
+                className="flex items-center justify-between text-sm uppercase tracking-widest text-[#2C1810] hover:text-[#8B1538] py-2 transition-colors border-b border-[#E5DCCB]/40"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                <span>{link.name}</span>
+                <ChevronRight size={14} className="text-[#8B1538]" />
+              </a>
+            ))}
+          </div>
+
+          <div className="pt-4 flex items-center justify-between text-xs text-[#5C3D1E]">
+            <span>Crafted in Bengal</span>
+            <span className="font-serif italic text-xs">Authentic Artisanal</span>
+          </div>
+        </div>
+      )}
+    </header>
+  );
 }
+
+// const navLinks = [
+//     { href: "/", label: "Home" },
+//     {
+//         href: "/products",
+//         label: "Shop",
+//         subLinks: [
+//             { href: "/products", label: "Shoping Products" },
+//             { href: "/gifting", label: "Gifting" },
+//         ]
+//     },
+//     { href: "/artists", label: "Artisans" },
+//     {
+//         href: "/our-story", label: "Our Story", subLinks: [
+//             { href: "/our-story", label: "Our Story" },
+//             { href: "/media/careers", label: "Join Us" },
+//             { href: "/contact", label: "Contact Us" },
+//         ]
+//     },
+//     {
+//         href: "/media/privacy&security",
+//         label: "Policy&security",
+//         subLinks: [
+//             { href: "/media/shipping", label: "Shipping Policy" },
+//             { href: "/media/returns", label: "Return & Refund Policy" },
+//             // { href: "/media/refund", label: "Refund Policy" },
+//             { href: "/media/terms", label: "Terms of Service" },
+//             { href: "/media/privacy&security", label: "Privacy & Security" },
+//         ]
+//     },
+
+// ];
+
+// const MobileLink = [
+//     { href: "/myAccount", label: "My Account", icon: User },
+//     { href: "/wishlist", label: "Wishlist", icon: Heart },
+//     { href: "/contact", label: "Contact Us", icon: Mail },
+//     { href: "/media/ourStory", label: "Our Story", icon: BookOpen },
+//     { href: "/auth/register", label: "Register", icon: UserPlus },
+//     { href: "/track-order/1", label: "Track Order", icon: Truck },
+//     // { href: "/media/post", label: "Journal", icon: Newspaper },
+//     { href: "/media/careers", label: "Careers", icon: Briefcase },
+//     { href: "/media/vendor", label: "Vendor", icon: Store },
+//     { href: "/cart", label: "Cart", icon: ShoppingBag },
+//     { href: "/media/faq", label: "FAQ", icon: HelpCircle },
+//     { href: "/media/shipping", label: "Shipping Policy", icon: Truck },
+//     { href: "/media/returns", label: "Return & Refund Policy", icon: RefreshCcw },
+//     // { href: "/media/refund", label: "Refund Policy" },
+//     { href: "/admin/dashboard", label: "admin", icon: Settings },
+//     { href: "/media/terms", label: "Terms of Service", icon: FileText },
+//     { href: "/media/privacy&security", label: "Privacy & Security", icon: Lock },
+//     { href: "/media/cookies", label: "Cookie Policy", icon: Cookie },
+//     // { href: "/media/post", label: "Post" },
+// ];

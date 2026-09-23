@@ -45,14 +45,14 @@ export default function ProductCard({ product }: { product: any }) {
     return (
         <div className="group h-full flex flex-col">
             {/* Image */}
-            <div className="relative aspect-[3/4] overflow-hidden bg-stone-100 mb-4">
+            <div className="relative aspect-3/4 overflow-hidden bg-stone-100 mb-4">
                 <Link href={`/products/${slug}`} className="absolute inset-0 z-0">
                     <Image
                         src={image}
                         alt={product.title ?? product.name ?? "Product"}
                         fill
-                        sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                        className="object-cover group-hover:scale-105 transition-transform duration-700"
+                        // sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     />
                 </Link>
 
@@ -71,7 +71,7 @@ export default function ProductCard({ product }: { product: any }) {
                 </div>
 
                 {/* Hover actions */}
-                <div className="absolute top-3 right-3 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-10">
+                {/* <div className="absolute top-3 right-3 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-10">
                     <button 
                         onClick={handleAddToWishlist}
                         className="w-8 h-8 bg-white border border-stone-100 flex items-center justify-center hover:bg-stone-900 hover:text-white transition-colors shadow-sm"
@@ -81,7 +81,7 @@ export default function ProductCard({ product }: { product: any }) {
                     <button className="w-8 h-8 bg-white border border-stone-100 flex items-center justify-center hover:bg-stone-900 hover:text-white transition-colors shadow-sm">
                         <ShoppingBag className="w-3.5 h-3.5" />
                     </button>
-                </div>
+                </div> */}
 
                 {/* Bottom CTA */}
                 <div className="absolute inset-x-0 bottom-0 translate-y-full group-hover:translate-y-0 transition-transform duration-300 z-10">
@@ -92,7 +92,7 @@ export default function ProductCard({ product }: { product: any }) {
             </div>
 
             {/* Info */}
-            <div className="flex-grow flex flex-col">
+            <div className="grow flex flex-col">
                 <p className="text-[9px] uppercase tracking-[0.15em] text-stone-400 font-medium mb-1">
                     {categoryName}
                 </p>

@@ -22,7 +22,7 @@ const ProductCardSkeleton = ({ index = 0 }: { index?: number }) => (
         style={{ animationDelay: `${index * 100}ms` }}
     >
         {/* Image skeleton with shimmer */}
-        <div className="relative aspect-square bg-gradient-to-r from-zinc-100 via-zinc-50 to-zinc-100 overflow-hidden rounded-sm animate-shimmer" />
+        <div className="relative aspect-square bg-linear-to-r from-zinc-100 via-zinc-50 to-zinc-100 overflow-hidden rounded-sm animate-shimmer" />
         {/* Text skeletons */}
         <div className="space-y-2 px-0.5">
             <div className="h-3 bg-zinc-200 rounded-full w-3/4" />
@@ -85,6 +85,7 @@ function FeaturedProductsList({ categoryId, categorySlug, limit = 4, randomize =
     const displayProducts = useMemo(() => {
         let items = [...filteredProducts];
         if (randomize) {
+            // eslint-disable-next-line react-hooks/purity
             items = items.sort(() => 0.5 - Math.random());
         }
         return items.slice(0, limit);

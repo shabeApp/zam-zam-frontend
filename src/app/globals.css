@@ -1,53 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
 
-@font-face {
-  font-family: 'Makova';
-  src: url('../assets/font/makova.otf') format('opentype');
-  font-display: swap;
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'goldens';
-  src: url('../assets/font/goldens.otf') format('opentype');
-  font-display: swap;
-  font-weight: normal;  
-  font-style: normal;
-}
-
-/* ===== Shantiniketan Heritage Design System ===== */
 :root {
-  /* Primary Royal Colors - Inspired by Shantiniketan red soil, Bengal art, royal warmth */
   --shantiniketan-red: 0 60% 36%;
-  /* #8B2E2E - Earth, heritage, power */
   --terracotta-clay: 18 55% 50%;
-  /* #C4623D - Art, soil, warmth */
   --royal-maroon: 345 54% 24%;
-  /* #5B1E2D - Luxury, depth */
-
-  /* Luxury Accent Colors - Royal premium touches */
   --antique-gold: 43 45% 55%;
-  /* #C9A24D - Royal, premium */
   --muted-brass: 42 38% 47%;
-  /* #A88C4A - Heritage luxury */
   --soft-ochre: 42 48% 63%;
-  /* #D6B26E - Calm richness */
-
-  /* Calm & Elegant Neutrals - Handcrafted paper, natural tones */
-  --ivory-white: 0, 0%, 100%;
-  /* #FAF7F2 - Background */
+  --ivory-white: 0 0% 100%;
   --handmade-paper: 38 34% 92%;
-  /* #EFE7DA - Sections */
   --ash-brown: 25 8% 39%;
-  /* #6B5E55 - Text */
   --charcoal-ink: 0 0% 17%;
-  /* #2B2B2B - Headings */
-
-
-  
-
-  /* Semantic Color Mappings - Light Mode */
   --background: var(--ivory-white);
   --foreground: var(--charcoal-ink);
   --card: 0 0% 100%;
@@ -72,73 +36,11 @@
   --input: var(--ash-brown);
   --ring: var(--antique-gold);
   --radius: 14px;
-
-
-  /* Typography System */
-  --font-heading: 'Makova', serif;
-  --font-sub-heading: 'Makova', serif;
-  --font-body: 'goldens', sans-serif;
-  --font-quote: 'Libre Baskerville', serif;
-
-
-  /* Luxury Shadow System - Subtle, soft, no harsh shadows */
-  --shadow-subtle: 0 2px 8px rgba(107, 94, 85, 0.08);
-  --shadow-card: 0 4px 16px rgba(107, 94, 85, 0.12);
-  --shadow-elevated: 0 8px 24px rgba(107, 94, 85, 0.16);
-  --shadow-sm: 0 1px 2px 0 rgba(107, 94, 85, 0.05);
-  --shadow: 0 2px 8px 0 rgba(107, 94, 85, 0.1);
-  --shadow-md: 0 4px 12px -1px rgba(107, 94, 85, 0.12);
-  --shadow-lg: 0 10px 20px -3px rgba(107, 94, 85, 0.15);
-  --shadow-xl: 0 20px 30px -5px rgba(107, 94, 85, 0.18);
+  --font-heading: "Cormorant Garamond", Georgia, serif;
+  --font-body: "Inter", sans-serif;
 }
 
-
-/* ===== Tailwind Theme ===== */
 @theme inline {
-
-  /*_________________my Custom Css Color code__________________*/
-
-  /*color code*/
-  /* #6E0C23 */
-  --read: 346 80% 24%;
-  /* #34150f - Luxury, depth */
-  --plan: 8 53% 13%;
-  /*  #15302B  */
-  --dark-green: 169 39% 14%;
-  /* #FDFDFD */
-  --white: 0 0% 99%;
-  /*___text___*/
-  /* #0B0B0B */
-  --text-black: 0 0% 4%;
-  /* #343432*/
-  --text-black-light: 60 2% 20%;
-  /* #FDFDFD */
-  --text-white: 0 0% 99%;
-  /*button*/
-  /* #34150f */
-  --button-black: 8 53% 13%;
-  /* #6b2e24 */
-  --button-hover-black: 8 50% 28%;
-  /*#989898*/
-  --button-white: 0 0% 60%;
-  /* #686767*/
-  --button-black: 0 0% 41%;
-  
-  
-  /*Color Mappings */
-
-  /* #3B4A3A */
-  --color-button:hsl(var(--button-black));
-  --color-button-hover:hsl(var(--button-hover-black));
-  --color-button-white:hsl(var(--button-white));
-  --color-button-black:hsl(var(--button-black));
-
-  --color-text-black:hsl(var(--text-black));
-  --color-text-black-light:hsl(var(--text-black-light));
-  --color-text-white:hsl(var(--text-white));
-  
-  /* _____________________________________________________________ */
-
   --color-background: hsl(var(--background));
   --color-foreground: hsl(var(--foreground));
   --color-card: hsl(var(--card));
@@ -162,55 +64,15 @@
   --color-border: hsl(var(--border));
   --color-input: hsl(var(--input));
   --color-ring: hsl(var(--ring));
-
-  /* Heritage Brand Colors as Tailwind utilities */
-  --color-shantiniketan-red: hsl(var(--shantiniketan-red));
-  --color-terracotta: hsl(var(--terracotta-clay));
-  --color-maroon: hsl(var(--royal-maroon));
-  --color-gold: hsl(var(--antique-gold));
-  --color-brass: hsl(var(--muted-brass));
-  --color-ochre: hsl(var(--soft-ochre));
-  --color-ivory: hsl(var(--ivory-white));
-  --color-paper: hsl(var(--handmade-paper));
-
   --radius-lg: var(--radius);
   --radius-md: calc(var(--radius) - 2px);
   --radius-sm: calc(var(--radius) - 4px);
-
   --font-sans: var(--font-body), system-ui, sans-serif;
   --font-serif: var(--font-heading), serif;
-  --font-mono: 'Courier New', monospace;
-
-  --keyframes-accordion-down: {
-    from {
-      height: 0;
-    }
-
-    to {
-      height: var(--radix-accordion-content-height);
-    }
-  }
-
-  ;
-
-  --keyframes-accordion-up: {
-    from {
-      height: var(--radix-accordion-content-height);
-    }
-
-    to {
-      height: 0;
-    }
-  }
-
-  ;
-  --animation-accordion-down: accordion-down 0.2s ease-out;
-  --animation-accordion-up: accordion-up 0.2s ease-out;
 }
 
-/* ===== Base Styles ===== */
-* {
-  border-color: hsl(var(--border));
+html {
+  scroll-behavior: smooth;
 }
 
 body {
@@ -221,247 +83,39 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* ===== Typography Hierarchy - Shantiniketan Heritage ===== */
-h1 {
+/* h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
-  font-size: 3.5rem;
-  /* 56px */
-  line-height: 1.1;
   letter-spacing: -0.02em;
-  font-weight: 700;
-  /* color: hsl(var(--charcoal-ink)); */
-}
-
-h2 {
-  font-family: var(--font-sub-heading);
-  font-size: 2.5rem;
-  /* 40px */
-  line-height: 1.2;
-  font-weight: 700;
-  /* color: hsl(var(--charcoal-ink)); */
-}
-
-h3 {
-  font-family: var(--font-sub-heading);
-  font-size: 1.75rem;
-  /* 28px */
-  line-height: 1.3;
-  font-weight: 600;
-  /* color: hsl(var(--charcoal-ink)); */
-}
-
-h4 {
-  font-family: var(--font-sub-heading);
-  font-size: 1.25rem;
-  /* 20px */
-  line-height: 1.4;
-  font-weight: 600;
-}
-
-h5, h6 {
-  font-family: var(--font-body);
-  font-size: 1rem;
-  /* 16px */
-  line-height: 1.5;
-  font-weight: 600;
-}
-
-
+  color: hsl(var(--charcoal-ink));
+} */
 
 p {
   font-family: var(--font-body);
   line-height: 1.7;
-  font-weight: 400;
 }
 
-/* body {
-  font-family: var(--font-body);
-  font-size: 1rem;
-  
-  line-height: 1.7;
-  font-weight: 400;
-} */
-
-/* .text-small {
-  font-size: 0.875rem;        14px
-} */
-
-.quote, blockquote {
-  font-family: var(--font-quote);
-  font-style: italic;
-  font-size: 1.125rem;
-  /* 18px */
-  line-height: 1.8;
-  color: hsl(var(--ash-brown));
-}
-
-/* ===== Card Styles - Handmade Paper Feel ===== */
 .card-heritage {
   background: hsl(var(--handmade-paper));
   border: 1px solid hsl(var(--ash-brown) / 0.15);
   border-radius: 16px;
-  padding: 1.5rem;
-  box-shadow: var(--shadow-card);
-  transition: all 0.3s ease;
+  box-shadow: 0 12px 30px rgba(107, 94, 85, 0.08);
 }
 
-.card-heritage:hover {
-  box-shadow: var(--shadow-elevated);
-  transform: translateY(-4px);
-}
-
-/* ===== Custom Scrollbar - Cultural Theme ===== */
-::-webkit-scrollbar {
-  width: 5px;
-  height: 5px;
-}
-
-::-webkit-scrollbar-track {
-  background: hsl(var(--handmade-paper)); ;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #34150f;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: hsl(var(--muted-brass));
-}
-
-/* ===== Focus Styles ===== */
-.focus-ring {
-  @apply outline-none ring-2 ring-gold ring-offset-2 ring-offset-background;
-}
-
-/* ===== Animations - Calm & Elegant ===== */
-@keyframes shimmer {
-  0% {
-    background-position: -100% 0;
-  }
-
-  100% {
-    background-position: 100% 0;
-  }
-}
-
-@keyframes pulse-soft {
-  0%, 100% {
-    opacity: 1;
-  }
-
-  50% {
-    opacity: 0.8;
-  }
-}
-
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0px);
-  }
-
-  50% {
-    transform: translateY(-8px);
-  }
-}
-
-@keyframes fade-in-up {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.animate-shimmer {
-  background: linear-gradient(90deg,
-      hsl(var(--handmade-paper)) 0%,
-      hsl(var(--antique-gold) / 0.2) 50%,
-      hsl(var(--handmade-paper)) 100%);
-  background-size: 200% 100%;
-  animation: shimmer 2s infinite;
-}
-
-.animate-pulse-soft {
-  animation: pulse-soft 3s ease-in-out infinite;
-}
-
-.animate-float {
-  animation: float 4s ease-in-out infinite;
-}
-
-.animate-fade-in-up {
-  animation: fade-in-up 0.6s ease-out;
-}
-
-/* ===== Glass Effect - Subtle Luxury ===== */
-.glass {
-  background: hsl(var(--ivory-white) / 0.85);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid hsl(var(--ash-brown) / 0.1);
-}
-
-.glass-dark {
-  background: hsl(var(--charcoal-ink) / 0.85);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid hsl(var(--antique-gold) / 0.2);
-}
-
-/* ===== Typography Utilities ===== */
 .text-gradient-heritage {
   background: linear-gradient(135deg, hsl(var(--royal-maroon)) 0%, hsl(var(--antique-gold)) 100%);
   -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
   background-clip: text;
+  color: transparent;
 }
 
-.text-heritage {
-  color: hsl(var(--shantiniketan-red));
-}
-
-.text-cultural {
-  font-family: var(--font-quote);
-  font-style: italic;
-  color: hsl(var(--ash-brown));
-}
-
-/* ===== Container ===== */
-.container-custom {
-  width: 100%;
-  max-width: 1400px;
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: 1rem;
-  padding-right: 1rem;
-}
-
-@media (min-width: 640px) {
-  .container-custom {
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
-  }
-}
-
-@media (min-width: 1024px) {
-  .container-custom {
-    padding-left: 2rem;
-    padding-right: 2rem;
-  }
-}
-
-/* ===== Cultural Accent Elements ===== */
 .accent-line-heritage {
   height: 3px;
-  background: linear-gradient(90deg,
-      hsl(var(--terracotta-clay)) 0%,
-      hsl(var(--antique-gold)) 50%,
-      hsl(var(--terracotta-clay)) 100%);
-  border-radius: 2px;
+  background: linear-gradient(90deg, hsl(var(--terracotta-clay)) 0%, hsl(var(--antique-gold)) 50%, hsl(var(--terracotta-clay)) 100%);
+  border-radius: 999px;
+}
+
+.shadow-royal {
+  box-shadow: 0 10px 40px -10px rgba(107, 94, 85, 0.15), 0 0 20px -5px rgba(201, 162, 77, 0.05);
 }
 
 .cultural-border {
@@ -469,51 +123,33 @@ p {
   border-radius: 12px;
 }
 
-/* ===== Responsive Typography ===== */
-@media (max-width: 768px) {
-  h1 {
-    font-size: 2.5rem;
-    /* 40px on mobile */
-  }
-
-  h2 {
-    font-size: 2rem;
-    /* 32px on mobile */
-  }
-
-  h3 {
-    font-size: 1.5rem;
-    /* 24px on mobile */
-  }
+input,
+textarea,
+select,
+button {
+  transition: all 0.2s ease;
 }
 
-/* ===== Custom Utilities ===== */
-.shadow-royal {
-  box-shadow: 0 10px 40px -10px rgba(107, 94, 85, 0.15), 0 0 20px -5px rgba(201, 162, 77, 0.05);
+input,
+textarea,
+select {
+  border-color: hsl(var(--border) / 0.4);
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
 }
 
-
-.scrollbar-hide::-webkit-scrollbar {
-  display: none;
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: hsl(var(--ring));
+  box-shadow: 0 0 0 3px hsl(var(--ring) / 0.12);
+  outline: none;
 }
 
-.scrollbar-hide {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
+button {
+  border-color: transparent;
 }
 
-@keyframes toast-in {
-  from {
-    transform: translateX(120%);
-    opacity: 0;
-  }
-
-  to {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
-
-.animate-toast-in {
-  animation: toast-in 0.35s ease-out;
+.font-serif {
+  font-family: var(--font-heading), Georgia, serif;
 }
