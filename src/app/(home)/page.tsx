@@ -65,7 +65,7 @@ export default function Home() {
       {/* --- PATOLA SHOWCASE SECTION --- */}
       <TestimonialsSection/>
 
-      <DecorativeSeparator />
+      {/* <DecorativeSeparator /> */}
     </div>
   );
 }

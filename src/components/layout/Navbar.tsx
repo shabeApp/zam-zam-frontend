@@ -1,7 +1,16 @@
 "use client";
 
 import React, { useState } from "react";
-import { Menu, Search, ShoppingBag, User, X, Sparkles, ChevronRight } from "lucide-react";
+import {
+  Menu,
+  Search,
+  ShoppingBag,
+  User,
+  X,
+  Sparkles,
+  ChevronRight,
+  Heart,
+} from "lucide-react";
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -17,9 +26,8 @@ export default function Header() {
   ];
 
   return (
-    <header className="sticky top-0 z-50 bg-[#F5F0E8]/85 backdrop-blur-md border-b border-[#E5DCCB] transition-all duration-300">
-      <div className="max-w-7xl mx-auto px-4 sm:px-8 h-20 flex items-center justify-between">
-        
+    <header className="sticky top-0 z-50 bg-[#F5F0E8]/75 backdrop-blur-md border-b border-[#E5DCCB] transition-all duration-300">
+      <div className=" mx-auto px-4 sm:px-8 h-20 flex items-center justify-between">
         {/* LEFT: Mobile Menu Button & Brand Emblem */}
         <div className="flex items-center gap-4">
           <button
@@ -31,8 +39,8 @@ export default function Header() {
           </button>
 
           {/* Artistic Brand Logo */}
-          <a href="" className="flex items-center gap-3 group">
-            <div className="relative w-10 h-10 rounded-full bg-gradient-to-br from-[#8B1538] to-[#5C3D1E] p-[1px] shadow-sm transition-transform duration-300 group-hover:scale-105">
+          <a href="/" className="flex items-center gap-3 group">
+            <div className="relative w-10 h-10 rounded-full bg-linear-to-br from-[#8B1538] to-[#5C3D1E] p-px shadow-sm transition-transform duration-300 group-hover:scale-105">
               <div className="w-full h-full bg-[#F5F0E8] rounded-full flex items-center justify-center border border-[#E5DCCB]">
                 <span className="font-serif text-[#8B1538] font-bold text-xs tracking-widest pl-0.5">
                   TL
@@ -41,10 +49,10 @@ export default function Header() {
             </div>
             <div className="hidden sm:flex flex-col">
               <span className="font-serif text-lg tracking-[0.18em] uppercase font-semibold text-[#2C1810] leading-none">
-                The Heritage
+                Zam Zam
               </span>
               <span className="text-[9px] uppercase tracking-[0.25em] text-[#8B1538] font-medium mt-1">
-                Kantha & Silk
+                Katha & Silk
               </span>
             </div>
           </a>
@@ -64,45 +72,67 @@ export default function Header() {
           ))}
         </nav>
 
-        {/* RIGHT: Actions (Search, Profile, Cart) */}
-        <div className="flex items-center gap-2 sm:gap-4">
-          {/* Expandable Search Input */}
+        {/* RIGHT: Actions */}
+        <div className="flex items-center gap-2 sm:gap-3">
+          {/* Search */}
           <div className="relative flex items-center">
-            {searchOpen && (
-              <input
-                type="text"
-                placeholder="Search Sarees, Crafts..."
-                className="w-40 sm:w-56 bg-[#E8E0D2] text-xs text-[#2C1810] placeholder-[#2C1810]/50 rounded-full px-4 py-2 pr-8 outline-none border border-[#D5C8B2] animate-in fade-in slide-in-from-right-4 duration-300"
-                autoFocus
-              />
-            )}
+            <div
+              className={`overflow-hidden transition-all duration-300 ${
+                searchOpen ? "w-52 sm:w-64 mr-2" : "w-0"
+              }`}
+            >
+              <div className="relative">
+                <Search
+                  size={16}
+                  className="absolute left-3 top-1/2 -translate-y-1/2 text-[#8B7355]"
+                />
+                <input
+                  type="text"
+                  placeholder="Search products..."
+                  className="w-full h-10 pl-9 pr-4 rounded-full text-sm text-[#2C1810] placeholder:text-[#8B7355] outline-none focus:ring-2 focus:ring-[#8B1538]/10"
+                  autoFocus
+                />
+              </div>
+            </div>
+
             <button
               onClick={() => setSearchOpen(!searchOpen)}
-              className="p-2 text-[#2C1810]/80 hover:text-[#8B1538] hover:bg-[#E5DCCB]/50 rounded-full transition-colors"
+              className="w-10 h-10 flex items-center justify-center rounded-full  text-[#2C1810] hover:bg-[#EFE6D8] hover:text-[#8B1538] transition"
               aria-label="Search"
             >
-              {searchOpen ? <X size={18} /> : <Search size={19} />}
+              {searchOpen ? <X size={18} /> : <Search size={18} />}
             </button>
           </div>
 
+          {/* Account */}
           <a
-            href="/account"
-            className="p-2 text-[#2C1810]/80 hover:text-[#8B1538] hover:bg-[#E5DCCB]/50 rounded-full transition-colors"
+            href="/myAccount"
+            className="w-10 h-10 flex items-center justify-center rounded-full  text-[#2C1810] hover:bg-[#EFE6D8] hover:text-[#8B1538] transition"
             aria-label="Account"
           >
-            <User size={19} />
+            <User size={18} />
           </a>
 
-          {/* Cart Icon with Counter */}
+          {/* Wishlist */}
+          <a
+            href="/wishlist"
+            className="w-10 h-10 flex items-center justify-center rounded-full  text-[#2C1810] hover:bg-[#EFE6D8] hover:text-[#8B1538] transition"
+            aria-label="Wishlist"
+          >
+            <Heart size={18} />
+          </a>
+
+          {/* Cart */}
           <a
             href="/cart"
-            className="relative p-2 text-[#2C1810]/80 hover:text-[#8B1538] hover:bg-[#E5DCCB]/50 rounded-full transition-colors group"
-            aria-label="Shopping Cart"
+            className="relative w-10 h-10 flex items-center justify-center rounded-full text-[#2C1810] hover:bg-[#EFE6D8] hover:text-[#8B1538] transition"
+            aria-label="Cart"
           >
-            <ShoppingBag size={19} />
+            <ShoppingBag size={18} />
+
             {cartItemCount > 0 && (
-              <span className="absolute top-1 right-1 w-4 h-4 bg-[#8B1538] text-white text-[9px] font-bold rounded-full flex items-center justify-center animate-pulse">
-                {cartItemCount}
+              <span className="absolute -top-1 -right-1 min-w-4.5 h-4.5 px-1 rounded-full bg-[#8B1538] text-white text-[10px] font-semibold flex items-center justify-center">
+                {cartItemCount > 99 ? "99+" : cartItemCount}
               </span>
             )}
           </a>
@@ -115,7 +145,7 @@ export default function Header() {
           <div className="flex items-center gap-2 text-[10px] uppercase tracking-[0.2em] text-[#8B1538] font-bold pb-2 border-b border-[#E5DCCB]">
             <Sparkles size={12} /> Curated Collections
           </div>
-          
+
           <div className="flex flex-col space-y-3">
             {navLinks.map((link) => (
               <a
@@ -132,7 +162,9 @@ export default function Header() {
 
           <div className="pt-4 flex items-center justify-between text-xs text-[#5C3D1E]">
             <span>Crafted in Bengal</span>
-            <span className="font-serif italic text-xs">Authentic Artisanal</span>
+            <span className="font-serif italic text-xs">
+              Authentic Artisanal
+            </span>
           </div>
         </div>
       )}

@@ -12,6 +12,7 @@ import {
   ThumbsUp,
   Truck,
 } from "lucide-react";
+import DecorativeSeparator from "@/components/custom/decorativeSeparator";
 // import Image from "next/image";
 
 // const Hero = () => {
@@ -101,6 +102,7 @@ const Hero = () => {
           </div>
         </div>
       </section>
+      <DecorativeSeparator />
       {/* --- FEATURES BAR --- */}
       <section className="py-6 px-4 sm:px-6 max-w-6xl mx-auto grid grid-cols-2 sm:grid-cols-3 md:flex md:flex-wrap md:justify-between items-center text-center gap-6">
         {[

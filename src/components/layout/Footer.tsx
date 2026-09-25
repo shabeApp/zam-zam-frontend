@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import DecorativeSeparator from "../custom/decorativeSeparator";
 
 export default function Footer() {
   const [email, setEmail] = useState("");
@@ -42,6 +43,8 @@ export default function Footer() {
   };
 
   return (
+    <>
+    <DecorativeSeparator/>
     <footer className="bg-[#F5F0E8] text-[#111111] border-t border-neutral-200">
       <div className="mx-auto px-5 py-12 sm:px-8 lg:px-16">
         {/* Top Section */}
@@ -160,6 +163,7 @@ export default function Footer() {
         </div>
       </div>
     </footer>
+</>
   );
 }
 

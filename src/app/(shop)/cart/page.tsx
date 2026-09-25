@@ -67,7 +67,7 @@ export default function CartPage() {
     if (cartItems.length === 0) {
         return (
             <section>
-                <div className="bg-white min-h-[80vh] flex items-center justify-center font-sans">
+                <div className=" min-h-[80vh] flex items-center justify-center font-sans">
                     <div
                         className="text-center max-w-lg px-6"
                     >
@@ -101,7 +101,7 @@ export default function CartPage() {
 
     return (
         <section>
-            <div className="bg-white min-h-screen font-sans">
+            <div className=" min-h-screen font-sans">
                 {/* Header Section */}
                 <header className="border-b border-stone-100 py-8 lg:py-16 bg-stone-50/50">
                     <div className="max-w-7xl mx-auto px-6">
