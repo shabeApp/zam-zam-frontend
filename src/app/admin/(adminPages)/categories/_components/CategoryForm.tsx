@@ -19,6 +19,7 @@ import {
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { CategoryFormData } from "@/validations/category.validation";
+import { CategoryThumbnail } from "./CategoryThumbnail";
 
 interface CategoryFormProps {
   register: UseFormRegister<CategoryFormData>;
@@ -139,23 +140,20 @@ export const CategoryForm = ({
 
       {/* Live Preview */}
       {watchImage && (
-        <div className="flex items-center gap-3 p-3 rounded-2xl border bg-muted/20">
-          <div className="w-14 h-14 rounded-xl overflow-hidden border bg-white">
-            <img
-              src={watchImage}
-              alt="Preview"
-              className="w-full h-full object-cover"
-              onError={(e) => {
-                e.currentTarget.style.display = "none";
-              }}
-            />
-          </div>
+        <div className="flex items-center gap-4 p-3 rounded-2xl border bg-muted/20">
+          <CategoryThumbnail
+            src={watchImage}
+            alt="Preview"
+            className="w-14 h-14 rounded-xl border bg-background"
+            iconClassName="h-6 w-6 text-muted-foreground/40"
+            fallbackIcon={type === "main" ? LayoutGrid : Tag}
+          />
 
           <div className="flex-1 min-w-0">
-            <p className="text-xs text-muted-foreground mb-1">
+            <p className="text-xs font-bold uppercase tracking-wider text-muted-foreground mb-1">
               Image Preview
             </p>
-            <p className="truncate text-xs font-mono">{watchImage}</p>
+            <p className="truncate text-xs font-mono text-foreground/80">{watchImage}</p>
           </div>
         </div>
       )}

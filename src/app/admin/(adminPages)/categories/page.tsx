@@ -47,6 +47,7 @@ import {
   CategoryFormData,
 } from "@/validations/category.validation";
 import { CategoryForm } from "./_components/CategoryForm";
+import { CategoryThumbnail } from "./_components/CategoryThumbnail";
 
 export default function CategoriesPage() {
   const {
@@ -367,11 +368,17 @@ export default function CategoriesPage() {
                 className="flex items-center justify-between p-6 cursor-pointer hover:bg-muted/30 transition-colors group"
                 onClick={() => toggleExpand(category.id)}
               >
-                <div className="flex items-center gap-5">
-                  <div className="text-3xl h-16 w-16 rounded-2xl bg-background flex items-center justify-center border border-primary/10 shadow-sm group-hover:scale-110 transition-transform">
-                    {category.image}
+                <div className="flex items-center gap-5 min-w-0">
+                  <div className="shrink-0 transition-transform group-hover:scale-105">
+                    <CategoryThumbnail
+                      src={category.image}
+                      alt={category.name}
+                      className="h-16 w-16 rounded-2xl shadow-sm"
+                      iconClassName="h-7 w-7 text-primary/50"
+                      fallbackIcon={LayoutGrid}
+                    />
                   </div>
-                  <div>
+                  <div className="min-w-0">
                     <div className="flex items-center gap-3">
                       <h3 className="text-xl font-black">{category.name}</h3>
                       {category.featured && (
@@ -478,9 +485,13 @@ export default function CategoriesPage() {
                         >
                           <div className="min-w-0">
                             <div className="flex items-center gap-3">
-                              <span className="text-lg h-8 w-8 flex items-center justify-center bg-muted rounded-xl">
-                                {sub.image}
-                              </span>
+                              <CategoryThumbnail
+                                src={sub.image}
+                                alt={sub.name}
+                                className="h-9 w-9 rounded-xl"
+                                iconClassName="h-4 w-4 text-primary/50"
+                                fallbackIcon={Tag}
+                              />
                               <p className="font-bold text-sm truncate">
                                 {sub.name}
                               </p>
@@ -668,10 +679,16 @@ export default function CategoriesPage() {
           {selectedItem && (
             <>
               <DialogHeader>
-                <DialogTitle className="flex items-center gap-3">
-                  <span className="text-3xl p-3 bg-muted rounded-2xl border shadow-inner">
-                    {selectedItem.image}
-                  </span>
+                <DialogTitle className="flex items-center gap-4">
+                  <CategoryThumbnail
+                    src={selectedItem.image}
+                    alt={selectedItem.name}
+                    className="h-16 w-16 rounded-2xl shadow-inner"
+                    iconClassName="h-8 w-8 text-primary/50"
+                    fallbackIcon={
+                      selectedItem.parentCategoryId ? Tag : LayoutGrid
+                    }
+                  />
                   <div>
                     <h2 className="text-2xl font-bold">{selectedItem.name}</h2>
                     <Badge
